@@ -45,32 +45,7 @@
             Todos los derechos reservados. @Bruno_tz
         </p>
     </footer>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Obtener los parámetros de la URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const productName = urlParams.get('name');
-            const productPrice = urlParams.get('price');
-            const productImage = urlParams.get('image');
-
-            // Actualizar el contenido de la página del producto
-            if (productName && productPrice && productImage) {
-                // Establecer el título del producto
-                document.querySelector('h1').textContent = productName;
-
-                // Actualizar la imagen
-                const productImg = document.querySelector('.camisa__imagen');
-                productImg.src = productImage;
-                productImg.alt = `imagen ${productName}`;
-
-                // Actualizar la descripción del producto o cualquier otro detalle dinámico
-                const productDescription = document.querySelector('.camisa__contenido p');
-                productDescription.textContent = `Compra ${productName} por solo ${productPrice}!`;
-
-                // Opcionalmente, puedes añadir otros campos dinámicos o lógica adicional
-            }
-        });
-    </script>
+    <script src="Js/scripts.js"></script> <!-- Asegúrate de incluir tu archivo JS -->
 </body>
 
 </html>

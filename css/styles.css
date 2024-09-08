@@ -246,3 +246,55 @@ h3 {
     cursor: pointer;
     background-color: var(--secudarioOscuro);
 }
+
+.filtros {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 4rem;
+}
+
+@media (max-width: 900px) {
+    .filtros {
+        display: flex;
+        padding: 0 2rem;
+        align-items: center;
+        flex-direction: column;
+    }
+}
+
+.filtros input,select{
+    border-radius: 0.8rem;
+}
+
+.filtro-nombre{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.filtro-nombre input{
+    width: 15rem;
+}
+
+.filtros button {
+    padding: 0.5rem 1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 1rem;
+}
+
+.filtros button:hover {
+    background-color: #2980b9;
+}
+
+#limpiar-filtros {
+    background-color: #e74c3c;
+}
+
+#limpiar-filtros:hover {
+    background-color: #c0392b;
+}

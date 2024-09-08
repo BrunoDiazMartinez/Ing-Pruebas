@@ -22,6 +22,38 @@
     </nav>
     <main>
         <h1>Nuestros Productos</h1>
+        <div class="filtros">
+            <div class="filtro-nombre">
+                <label for="filtro-nombre">Buscar por nombre:</label>
+                <input type="text" id="filtro-nombre" placeholder="Nombre del producto">
+            </div>
+
+            <div>
+                <label for="filtro-precio">Filtrar por precio:</label>
+                <select id="filtro-precio">
+                    <option value="todos">Todos</option>
+                    <option value="menos-20">Menos de $20</option>
+                    <option value="20-50">$20 - $50</option>
+                    <option value="mas-50">Más de $50</option>
+                </select>
+            </div>
+
+            <div>
+                <label for="filtro-tipo">Filtrar por producto:</label>
+                <select id="filtro-tipo">
+                    <option value="todos">Todos</option>
+                    <option value="framework">Framework</option>
+                    <option value="librería">Librería</option>
+                    <option value="plataforma">Plataforma</option>
+                    <option value="herramienta">Herramienta</option>
+                    <option value="lenguaje">Lenguaje</option>
+                    <option value="CMS">CMS</option>
+                </select>
+            </div>
+
+            <button id="aplicar-filtros">Aplicar Filtros</button>
+            <button id="limpiar-filtros">Limpiar Filtros</button>
+        </div>
         <div class="grid" id="product-grid">
             <!-- Productos se inyectarán aquí -->
         </div>
