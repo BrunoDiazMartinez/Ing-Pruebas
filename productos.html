@@ -21,16 +21,12 @@
         <a href="nosotros.html" class="navegacion__enlace navegacion__enlace--activo">Nosotros</a>
     </nav>
     <main class="contenedor">
-        <h1>React JS</h1>
+        <h1></h1> <!-- Este se actualizará dinámicamente con el nombre del producto -->
         <div class="camisa">
-            <img src="img/3.jpg" alt="imagen del producto" class="camisa__imagen">
+            <img src="" alt="" class="camisa__imagen">
+            <!-- Este se actualizará dinámicamente con la imagen del producto -->
             <div class="camisa__contenido">
-                <p>
-                    There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                    alteration in some form, by injected humour, or randomised words which don't look even slightly
-                    believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't
-                    anything embarrassing hidden in the middle of text.
-                </p>
+                <p></p> <!-- Este se actualizará dinámicamente con la descripción del producto -->
                 <form class="formulario">
                     <select class="formulario__campo">
                         <option disabled>Seleccionar talla</option>
@@ -49,6 +45,32 @@
             Todos los derechos reservados. @Bruno_tz
         </p>
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Obtener los parámetros de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const productName = urlParams.get('name');
+            const productPrice = urlParams.get('price');
+            const productImage = urlParams.get('image');
+
+            // Actualizar el contenido de la página del producto
+            if (productName && productPrice && productImage) {
+                // Establecer el título del producto
+                document.querySelector('h1').textContent = productName;
+
+                // Actualizar la imagen
+                const productImg = document.querySelector('.camisa__imagen');
+                productImg.src = productImage;
+                productImg.alt = `imagen ${productName}`;
+
+                // Actualizar la descripción del producto o cualquier otro detalle dinámico
+                const productDescription = document.querySelector('.camisa__contenido p');
+                productDescription.textContent = `Compra ${productName} por solo ${productPrice}!`;
+
+                // Opcionalmente, puedes añadir otros campos dinámicos o lógica adicional
+            }
+        });
+    </script>
 </body>
 
 </html>
