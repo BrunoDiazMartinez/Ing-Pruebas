@@ -118,21 +118,24 @@ h3 {
     border-radius: 1.8rem;
     margin: auto;
     padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .producto__nombre {
-    font-size: 4rem;
+    font-size: 2.5rem;
 }
 
 .producto__precio {
-    font-size: 2.8rem;
+    font-size: 2.2rem;
     color: var(--secundario);
 }
 
 .producto__nombre,
 .producto__precio {
     font-family: var(--fuentePrincipal);
-    margin: 1rem 0;
+    margin: auto;
     text-align: center;
     line-height: 2.5rem;
 }
@@ -211,11 +214,17 @@ h3 {
 }
 
 @media (min-width: 900px) {
-    .camisa {
+    .articulo {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 2rem;
     }
+}
+
+.articulo__imagen{
+    border-radius: 1.5rem;
+    max-width: 50rem;
+    max-height: 90rem;
 }
 
 .formulario {
