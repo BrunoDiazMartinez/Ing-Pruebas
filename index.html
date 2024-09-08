@@ -19,11 +19,12 @@
     <nav class="navegacion">
         <a href="index.html" class="navegacion__enlace">Tienda</a>
         <a href="nosotros.html" class="navegacion__enlace navegacion__enlace--activo">Nosotros</a>
+        <a href="carrito.html" id="boton-carrito" class="boton-carrito">Carrito de Compras</a>
     </nav>
     <main>
         <h1>Nuestros Productos</h1>
         <div class="filtros">
-            <div class="filtro-nombre">
+            <div>
                 <label for="filtro-nombre">Buscar por nombre:</label>
                 <input type="text" id="filtro-nombre" placeholder="Nombre del producto">
             </div>
@@ -42,13 +43,26 @@
                 <label for="filtro-tipo">Filtrar por producto:</label>
                 <select id="filtro-tipo">
                     <option value="todos">Todos</option>
-                    <option value="framework">Framework</option>
-                    <option value="librería">Librería</option>
-                    <option value="plataforma">Plataforma</option>
-                    <option value="herramienta">Herramienta</option>
-                    <option value="lenguaje">Lenguaje</option>
-                    <option value="CMS">CMS</option>
+                    <option value="pantalon">Pantalon</option>
+                    <option value="playera">Playera</option>
+                    <option value="pijama">Pijamas</option>
+                    <option value="calzado">Calzado</option>
+                    <option value="sudaderas">Sudaderas</option>
+                    <option value="chamarras">Chamarras</option>
                 </select>
+            </div>
+
+            <div>
+                <label for="filtro-categoria">Filtrar por Categoría:</label>
+                <select id="filtro-categoria">
+                    <option value="todos">Todos</option>
+                    <option value="hombre">Hombre</option>
+                    <option value="mujer">Mujer</option>
+                    <option value="niño">Niño</option>
+                    <option value="niña">Niña</option>
+                    <option value="bebé">Bebé</option>
+                </select>
+
             </div>
 
             <button id="aplicar-filtros">Aplicar Filtros</button>

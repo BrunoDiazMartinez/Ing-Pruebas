@@ -109,15 +109,15 @@ h3 {
 
 @media(min-width: 900px) {
     .grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(4, 1fr);
     }
 }
 
 .producto {
     background-color: var(--primarioOscuro);
-    padding: 2rem;
     border-radius: 1.8rem;
-    margin: 5.5rem;
+    margin: auto;
+    padding: 2.5rem;
 }
 
 .producto__nombre {
@@ -138,6 +138,8 @@ h3 {
 }
 .producto__imagen{
     border-radius: 1.2rem;
+    height: 25rem;
+    width: 25rem;
 }
 .footer {
     background-color: var(--primarioOscuro);
@@ -267,14 +269,10 @@ h3 {
     border-radius: 0.8rem;
 }
 
-.filtro-nombre{
+.filtros div{
     display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.filtro-nombre input{
-    width: 15rem;
+    flex-direction: column;
+    align-items: normal;
 }
 
 .filtros button {
@@ -297,4 +295,18 @@ h3 {
 
 #limpiar-filtros:hover {
     background-color: #c0392b;
+}
+
+.boton-carrito {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.boton-carrito:hover {
+    background-color: #218838;
 }
