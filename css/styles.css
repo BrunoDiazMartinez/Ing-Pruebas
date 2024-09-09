@@ -325,7 +325,7 @@ h3 {
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    padding: 1.5rem;
+    padding: 2.4rem;
     border-bottom: 1px solid black;
 }
 .contenedor__carrito>img{
@@ -343,4 +343,5 @@ h3 {
     border: none;
     border-radius: 5px;
     padding: 0.5rem;
+    margin: 2rem;
 }
