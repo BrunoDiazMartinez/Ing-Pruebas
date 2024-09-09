@@ -24,14 +24,52 @@
         <div id="carrito-contenido">
             <!-- Los productos del carrito se mostrarán aquí -->
         </div>
-        <button id="vaciar-carrito">Vaciar Carrito</button>
+        <div class="carrito__footer">
+            <button id="vaciar-carrito" class="carrito__boton">Vaciar Carrito</button>
+        </div>
     </main>
     <footer class="footer">
         <p class="footer__texto">
             Todos los derechos reservados. @Bruno_tz
         </p>
     </footer>
-    <script src="Js/scripts.js"></script>
+    <script>
+        //Listener de carrito
+        document.addEventListener('DOMContentLoaded', function () {
+            const carritoContenido = document.getElementById('carrito-contenido');
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            if (carrito.length === 0) {
+                carritoContenido.innerHTML = '<p>Tu carrito está vacío.</p>';
+            } else {
+                carrito.forEach(producto => {
+                    const productoDiv = document.createElement('div');
+                    productoDiv.classList.add('producto-carrito');
+
+                    const productoInfo = `
+                        <div class="contenedor__carrito">
+                        <img src="${producto.imagen}" alt="${producto.nombre}">
+                        <p>${producto.nombre}</p>
+                        <p>Talla: ${producto.talla}</p>
+                        <p>Cantidad: ${producto.cantidad}</p>
+                        <p>Precio: $${producto.precio}</p>
+                        </div>
+                    `;
+
+                    productoDiv.innerHTML = productoInfo;
+                    carritoContenido.appendChild(productoDiv);
+                });
+            }
+
+            // Botón para vaciar el carrito
+            const vaciarCarritoBtn = document.getElementById('vaciar-carrito');
+            vaciarCarritoBtn.addEventListener('click', function () {
+                localStorage.removeItem('carrito');
+                carritoContenido.innerHTML = '<p>Tu carrito está vacío.</p>';
+            });
+        });
+
+    </script>
 </body>
 
 </html>

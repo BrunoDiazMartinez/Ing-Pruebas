@@ -19,6 +19,10 @@
     <nav class="navegacion">
         <a href="index.html" class="navegacion__enlace">Tienda</a>
         <a href="nosotros.html" class="navegacion__enlace navegacion__enlace--activo">Nosotros</a>
+        <div class="carrito-contenedor"></div>
+        <a href="carrito.html" class="navegacion__enlace">Ver Carrito</a>
+        <div id="carrito-preview"></div> <!-- Este contenedor muestra los productos -->
+        </div>
     </nav>
     <main class="contenedor">
         <h1></h1> <!-- Este se actualizará dinámicamente con el nombre del producto -->
@@ -27,14 +31,14 @@
             <!-- Este se actualizará dinámicamente con la imagen del producto -->
             <div class="articulo__contenido">
                 <p></p> <!-- Este se actualizará dinámicamente con la descripción del producto -->
-                <form class="formulario">
-                    <select class="formulario__campo">
-                        <option disabled>Seleccionar talla</option>
-                        <option>Chica</option>
-                        <option>Mediana</option>
-                        <option>Grande</option>
+                <form id="form-producto" class="formulario">
+                    <select class="formulario__campo" id="talla">
+                        <option disabled selected>Seleccionar talla</option>
+                        <option value="Chica">Chica</option>
+                        <option value="Mediana">Mediana</option>
+                        <option value="Grande">Grande</option>
                     </select>
-                    <input class="formulario__campo" type="number" placeholder="Cantidad" min="1">
+                    <input id="cantidad" class="formulario__campo" type="number" placeholder="Cantidad" min="1">
                     <input class="formulario__submit" type="submit" value="Agregar al carrito">
                 </form>
             </div>
@@ -45,7 +49,88 @@
             Todos los derechos reservados. @Bruno_tz
         </p>
     </footer>
-    <script src="Js/scripts.js"></script> <!-- Asegúrate de incluir tu archivo JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Obtener los parámetros de la URL
+            const params = new URLSearchParams(window.location.search);
+            const nombreProducto = params.get('name');
+            const precioProducto = params.get('price');
+            const imagenProducto = params.get('image');
+
+            // Actualizar el contenido de la página con los detalles del producto
+            const tituloProducto = document.querySelector('h1');
+            const imagen = document.querySelector('.articulo__imagen');
+            const descripcionProducto = document.querySelector('.articulo__contenido p');
+
+            tituloProducto.textContent = nombreProducto; // Mostrar el nombre del producto
+            imagen.src = imagenProducto; // Mostrar la imagen del producto
+            imagen.alt = nombreProducto; // Establecer un texto alternativo
+            descripcionProducto.textContent = `Precio: $${precioProducto}`; // Mostrar el precio del producto
+
+            // Manejar la lógica del carrito
+            const formulario = document.getElementById('form-producto');
+            const carritoPreview = document.getElementById('carrito-preview');
+
+            // Función para mostrar productos del carrito en el preview
+            function actualizarCarritoPreview() {
+                const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+                carritoPreview.innerHTML = '';
+
+                if (carrito.length === 0) {
+                } else {
+                    carrito.forEach(producto => {
+                        const productoDiv = document.createElement('div');
+                        productoDiv.classList.add('producto-preview');
+
+                        productoDiv.innerHTML = `
+                            <p>${producto.nombre} (x${producto.cantidad}) - $${producto.precio}</p>
+                        `;
+                        carritoPreview.appendChild(productoDiv);
+                    });
+                }
+            }
+
+            // Cargar el carrito al cargar la página
+            actualizarCarritoPreview();
+
+            // Manejar el evento de agregar al carrito
+            formulario.addEventListener('submit', function (event) {
+                event.preventDefault(); // Evitar el envío del formulario
+
+                // Obtener talla y cantidad
+                const tallaSeleccionada = document.getElementById('talla').value;
+                const cantidad = parseInt(document.getElementById('cantidad').value, 10);
+
+                // Validar que se haya seleccionado una cantidad válida
+                if (isNaN(cantidad) || cantidad <= 0 || tallaSeleccionada === "") {
+                    window.alert('Por favor, selecciona una talla y al menos un artículo.');
+                    return; // Detener la ejecución si la cantidad no es válida o talla no seleccionada
+                }
+
+                // Crear objeto del producto a agregar al carrito
+                const producto = {
+                    nombre: nombreProducto,
+                    precio: precioProducto,
+                    imagen: imagenProducto,
+                    talla: tallaSeleccionada,
+                    cantidad: cantidad
+                };
+
+                // Agregar el producto a localStorage
+                let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+                carrito.push(producto);
+                localStorage.setItem('carrito', JSON.stringify(carrito));
+
+                // Actualizar la vista del carrito
+                actualizarCarritoPreview();
+
+                // Mostrar confirmación de agregado
+                window.alert('Producto agregado al carrito');
+
+                window.location.href = 'index.html';
+            });
+        });
+    </script> <!-- Asegúrate de incluir tu archivo JS -->
 </body>
 
 </html>

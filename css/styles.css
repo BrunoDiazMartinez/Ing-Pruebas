@@ -319,3 +319,28 @@ h3 {
 .boton-carrito:hover {
     background-color: #218838;
 }
+
+.contenedor__carrito{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 1.5rem;
+    border-bottom: 1px solid black;
+}
+.contenedor__carrito>img{
+    height: 25rem;
+    width: 25rem;
+    border-radius: 1rem;
+}
+
+.carrito__footer{
+    display: flex;
+    justify-content: flex-end; /* Mueve los elementos a los extremos */
+}
+
+.carrito__boton{
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
