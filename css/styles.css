@@ -329,9 +329,24 @@ h3 {
     border-bottom: 1px solid black;
 }
 .contenedor__carrito>img{
-    height: 25rem;
-    width: 25rem;
+    height: 10rem;
+    width: 10rem;
     border-radius: 1rem;
+}
+
+.contenedor__carrito>input{
+    width: 5rem;
+}
+
+.contenedor__carrito>button{
+    background: #f42d17;
+}
+
+.carrito__total{
+    padding: 1.5rem 3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
 }
 
 .carrito__footer{
