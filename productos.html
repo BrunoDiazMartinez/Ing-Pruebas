@@ -56,32 +56,32 @@
             const nombreProducto = params.get('name');
             const precioProducto = params.get('price');
             const imagenProducto = params.get('image');
-
+    
             // Actualizar el contenido de la página con los detalles del producto
             const tituloProducto = document.querySelector('h1');
             const imagen = document.querySelector('.articulo__imagen');
             const descripcionProducto = document.querySelector('.articulo__contenido p');
-
+    
             tituloProducto.textContent = nombreProducto; // Mostrar el nombre del producto
             imagen.src = imagenProducto; // Mostrar la imagen del producto
             imagen.alt = nombreProducto; // Establecer un texto alternativo
             descripcionProducto.textContent = `Precio: $${precioProducto}`; // Mostrar el precio del producto
-
+    
             // Manejar la lógica del carrito
             const formulario = document.getElementById('form-producto');
             const carritoPreview = document.getElementById('carrito-preview');
-
+    
             // Función para mostrar productos del carrito en el preview
             function actualizarCarritoPreview() {
                 const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
                 carritoPreview.innerHTML = '';
-
+    
                 if (carrito.length === 0) {
                 } else {
                     carrito.forEach(producto => {
                         const productoDiv = document.createElement('div');
                         productoDiv.classList.add('producto-preview');
-
+    
                         productoDiv.innerHTML = `
                             <p>${producto.nombre} (x${producto.cantidad}) - $${producto.precio}</p>
                         `;
@@ -89,24 +89,29 @@
                     });
                 }
             }
-
+    
             // Cargar el carrito al cargar la página
             actualizarCarritoPreview();
-
+    
             // Manejar el evento de agregar al carrito
             formulario.addEventListener('submit', function (event) {
                 event.preventDefault(); // Evitar el envío del formulario
-
+    
                 // Obtener talla y cantidad
                 const tallaSeleccionada = document.getElementById('talla').value;
                 const cantidad = parseInt(document.getElementById('cantidad').value, 10);
-
-                // Validar que se haya seleccionado una cantidad válida
-                if (isNaN(cantidad) || cantidad <= 0 || tallaSeleccionada === "") {
-                    window.alert('Por favor, selecciona una talla y al menos un artículo.');
-                    return; // Detener la ejecución si la cantidad no es válida o talla no seleccionada
+    
+                // Validar que se haya seleccionado una talla y una cantidad válida
+                if (tallaSeleccionada === "Seleccionar talla") {
+                    window.alert('Por favor, selecciona una talla.');
+                    return; // Detener la ejecución si no se ha seleccionado una talla
                 }
-
+    
+                if (isNaN(cantidad) || cantidad <= 0) {
+                    window.alert('Por favor, selecciona una cantidad válida.');
+                    return; // Detener la ejecución si la cantidad no es válida
+                }
+    
                 // Crear objeto del producto a agregar al carrito
                 const producto = {
                     nombre: nombreProducto,
@@ -115,22 +120,23 @@
                     talla: tallaSeleccionada,
                     cantidad: cantidad
                 };
-
+    
                 // Agregar el producto a localStorage
                 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
                 carrito.push(producto);
                 localStorage.setItem('carrito', JSON.stringify(carrito));
-
+    
                 // Actualizar la vista del carrito
                 actualizarCarritoPreview();
-
+    
                 // Mostrar confirmación de agregado
                 window.alert('Producto agregado al carrito');
-
+    
                 window.location.href = 'index.html';
             });
         });
-    </script> <!-- Asegúrate de incluir tu archivo JS -->
+    </script>
+    
 </body>
 
 </html>
