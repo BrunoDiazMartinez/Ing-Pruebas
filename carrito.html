@@ -18,6 +18,7 @@
     <nav class="navegacion">
         <a href="index.html" class="navegacion__enlace">Tienda</a>
         <a href="nosotros.html" class="navegacion__enlace navegacion__enlace--activo">Nosotros</a>
+        <a href="cliente.html" class="navegacion__enlace">Ver Carrito</a> <!-- Redirigir a la nueva página -->
     </nav>
     <main class="contenedor">
         <h1>Carrito de Compras</h1>
@@ -29,7 +30,9 @@
         </div>
         <div class="carrito__footer">
             <button id="vaciar-carrito" class="carrito__boton">Vaciar Carrito</button>
+            <button id="pagar" class="carrito__boton">Proceder al Pago</button>
         </div>
+
     </main>
     <footer class="footer">
         <p class="footer__texto">
@@ -120,6 +123,22 @@
             // Mostrar el carrito al cargar la página
             mostrarCarrito();
         });
+        // Listener para el botón de pago
+        // Listener para el botón de pago
+        document.getElementById('pagar').addEventListener('click', function () {
+            // Obtener el carrito de localStorage
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            // Verificar si el carrito está vacío
+            if (carrito.length === 0) {
+                window.alert('El carrito está vacío. Agrega productos antes de proceder al pago.');
+            } else {
+                // Redirigir a la página de pago si el carrito tiene productos
+                window.location.href = 'pago.html';
+            }
+        });
+
+
     </script>
 </body>
 

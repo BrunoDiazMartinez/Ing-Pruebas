@@ -376,3 +376,19 @@ h3 {
     padding: 0.5rem;
     margin: 2rem;
 }
+
+.pago__submit {
+    background-color: var(--secundario);
+    border: none;
+    font-size: 1.4rem;
+    font-family: var(--fuentePrincipal);
+    padding: 0.8rem;
+    transition: background-color .1s ease;
+    border-radius: 2rem;
+    width: 15rem;
+}
+
+.pago__submit:hover {
+    cursor: pointer;
+    background-color: var(--secudarioOscuro);
+}

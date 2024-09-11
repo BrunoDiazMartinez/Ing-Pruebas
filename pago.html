@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forma de Pago</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img class="header__logo" src="./img/logo.png" alt="logoTipo">
+        </a>
+    </header>
+
+    <nav class="navegacion">
+        <a href="index.html" class="navegacion__enlace">Tienda</a>
+        <a href="carrito.html" class="navegacion__enlace">Ver Carrito</a>
+    </nav>
+
+    <main class="contenedor">
+        <h1>Forma de Pago</h1>
+
+        <form id="form-pago" class="formulario">
+            <div class="formulario__campo">
+                <label for="nombre">Nombre del Titular</label>
+                <input id="nombre" type="text" placeholder="Nombre del titular de la tarjeta" required>
+            </div>
+
+            <div class="formulario__campo">
+                <label for="numero-tarjeta">Número de Tarjeta</label>
+                <input id="numero-tarjeta" type="text" placeholder="1234 5678 9101 1121" required>
+            </div>
+
+            <div class="formulario__campo">
+                <label for="fecha-expiracion">Fecha de Expiración</label>
+                <input id="fecha-expiracion" type="text" placeholder="MM/AA" required>
+            </div>
+
+            <div class="formulario__campo">
+                <label for="cvv">CVV</label>
+                <input id="cvv" type="text" placeholder="123" required>
+            </div>
+
+            <input class="formulario__submit" type="submit" value="Pagar">
+        </form>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__texto">
+            Todos los derechos reservados. @Bruno_tz
+        </p>
+    </footer>
+
+    <script>
+        document.getElementById('form-pago').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío real
+
+            // Aquí puedes agregar lógica para procesar el pago, por ejemplo, validar los campos
+            window.alert('Pago realizado con éxito');
+            window.location.href = 'index.html'; // Redirigir después de completar el pago
+        });
+    </script>
+</body>
+
+</html>

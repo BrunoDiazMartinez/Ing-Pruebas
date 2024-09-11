@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos del Cliente</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img class="header__logo" src="./img/logo.png" alt="logoTipo">
+        </a>
+    </header>
+
+    <main class="contenedor">
+        <h1>¿Eres cliente?</h1>
+
+        <form id="form-cliente" class="formulario__cliente">
+            <label for="es-cliente">Selecciona una opción:</label>
+            <select id="es-cliente" class="formulario__cliente-campo">
+                <option value="" selected disabled>Selecciona una opción</option>
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+
+            <!-- Campos adicionales para clientes existentes -->
+            <div id="datos-cliente" style="display: none;">
+                <h2>Información del Cliente Existente</h2>
+                <label for="id-cliente">ID Cliente</label>
+                <input id="id-cliente" type="text" placeholder="Introduce tu ID de cliente">
+
+                <label for="nombre-cliente">Nombre</label>
+                <input id="nombre-cliente" type="text" placeholder="Introduce tu nombre">
+
+                <label for="apellido-cliente">Apellido</label>
+                <input id="apellido-cliente" type="text" placeholder="Introduce tu apellido">
+            </div>
+
+            <!-- Botón para continuar a la página de pago -->
+            <div class="pago__button" style="display: none;" id="continuar-pago">
+                <input class="pago__submit" type="submit" value="Continuar al Pago">
+            </div>
+        </form>
+
+        <div id="registro-nuevo" style="display: none;">
+            <h2>Registro de Nuevo Cliente</h2>
+            <a href="registro.html">Haz clic aquí para registrarte</a> <!-- Enlace al formulario de registro -->
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p class="footer__texto">
+            Todos los derechos reservados. @Bruno_tz
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const esClienteSelect = document.getElementById('es-cliente');
+            const datosClienteDiv = document.getElementById('datos-cliente');
+            const continuarPagoBtn = document.getElementById('continuar-pago');
+            const registroNuevoDiv = document.getElementById('registro-nuevo');
+
+            // Mostrar u ocultar secciones dependiendo de si el usuario es cliente
+            esClienteSelect.addEventListener('change', function () {
+                if (esClienteSelect.value === 'si') {
+                    datosClienteDiv.style.display = 'block'; // Mostrar campos adicionales
+                    continuarPagoBtn.style.display = 'block'; // Mostrar botón de continuar al pago
+                    registroNuevoDiv.style.display = 'none';  // Ocultar enlace de registro nuevo
+                } else if (esClienteSelect.value === 'no') {
+                    datosClienteDiv.style.display = 'none';  // Ocultar campos adicionales
+                    continuarPagoBtn.style.display = 'none'; // Ocultar botón de continuar al pago
+                    registroNuevoDiv.style.display = 'block'; // Mostrar enlace de registro nuevo
+                }
+            });
+
+            // Validar y continuar al formulario de pago
+            const formCliente = document.getElementById('form-cliente');
+            formCliente.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevenir el envío por defecto
+
+                // Validar si los campos del cliente están completos
+                const esCliente = esClienteSelect.value;
+                if (esCliente === 'si') {
+                    const idCliente = document.getElementById('id-cliente').value;
+                    const nombreCliente = document.getElementById('nombre-cliente').value;
+                    const apellidoCliente = document.getElementById('apellido-cliente').value;
+
+                    if (!idCliente || !nombreCliente || !apellidoCliente) {
+                        window.alert('Por favor, completa todos los campos de cliente.');
+                        return; // Detener el proceso si algún campo está vacío
+                    }
+
+                    // Si todo está bien, redirigir al formulario de pago
+                    window.location.href = 'pago.html';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
