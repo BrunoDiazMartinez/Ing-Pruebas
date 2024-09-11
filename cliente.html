@@ -32,6 +32,9 @@
                 <h2>Información del Cliente Existente</h2>
                 <label for="id-cliente">ID Cliente</label>
                 <input id="id-cliente" type="text" placeholder="Introduce tu ID de cliente">
+                
+                <label for="password">Password</label>
+                <input id="password" type="password" placeholder="Introduce tu Password">
 
                 <label for="nombre-cliente">Nombre</label>
                 <input id="nombre-cliente" type="text" placeholder="Introduce tu nombre">
@@ -65,6 +68,12 @@
             const continuarPagoBtn = document.getElementById('continuar-pago');
             const registroNuevoDiv = document.getElementById('registro-nuevo');
 
+            // Simulación de usuarios existentes (en un entorno real, esto vendría de una base de datos)
+            const usuariosExistentes = [
+                { id: '12345', password: 'password123', nombre: 'Juan', apellido: 'Pérez' },
+                { id: '67890', password: 'password456', nombre: 'María', apellido: 'García' }
+            ];
+
             // Mostrar u ocultar secciones dependiendo de si el usuario es cliente
             esClienteSelect.addEventListener('change', function () {
                 if (esClienteSelect.value === 'si') {
@@ -73,7 +82,7 @@
                     registroNuevoDiv.style.display = 'none';  // Ocultar enlace de registro nuevo
                 } else if (esClienteSelect.value === 'no') {
                     datosClienteDiv.style.display = 'none';  // Ocultar campos adicionales
-                    continuarPagoBtn.style.display = 'none'; // Ocultar botón de continuar al pago
+                    continuarPagoBtn.style.display = 'block'; // Mostrar botón de continuar
                     registroNuevoDiv.style.display = 'block'; // Mostrar enlace de registro nuevo
                 }
             });
@@ -83,19 +92,36 @@
             formCliente.addEventListener('submit', function (event) {
                 event.preventDefault(); // Prevenir el envío por defecto
 
-                // Validar si los campos del cliente están completos
+                // Validar si los campos del cliente están completos (solo si selecciona "sí")
                 const esCliente = esClienteSelect.value;
                 if (esCliente === 'si') {
                     const idCliente = document.getElementById('id-cliente').value;
+                    const password = document.getElementById('password').value;
                     const nombreCliente = document.getElementById('nombre-cliente').value;
                     const apellidoCliente = document.getElementById('apellido-cliente').value;
 
-                    if (!idCliente || !nombreCliente || !apellidoCliente) {
+                    if (!idCliente || !password || !nombreCliente || !apellidoCliente) {
                         window.alert('Por favor, completa todos los campos de cliente.');
                         return; // Detener el proceso si algún campo está vacío
                     }
 
-                    // Si todo está bien, redirigir al formulario de pago
+                    // Validar si el usuario existe en nuestra simulación y si los datos coinciden
+                    const usuarioValido = usuariosExistentes.find(usuario =>
+                        usuario.id === idCliente &&
+                        usuario.password === password &&
+                        usuario.nombre === nombreCliente &&
+                        usuario.apellido === apellidoCliente
+                    );
+
+                    if (!usuarioValido) {
+                        window.alert('ID, contraseña, nombre o apellido incorrectos. Por favor, intenta de nuevo.');
+                        return; // Detener si el usuario no existe o los datos no coinciden
+                    }
+
+                    // Si los datos son correctos, redirigir al formulario de pago
+                    window.location.href = 'pago.html';
+                } else {
+                    // Si selecciona "no", redirigir al formulario de pago directamente
                     window.location.href = 'pago.html';
                 }
             });

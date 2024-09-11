@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
         mostrarProductos(products);
     });
 });
-
+/*
 //Listener de producto individual
 document.addEventListener('DOMContentLoaded', function () {
     const params = new URLSearchParams(window.location.search);
@@ -239,3 +239,4 @@ document.addEventListener('DOMContentLoaded', function () {
         carritoContenido.innerHTML = '<p>Tu carrito está vacío.</p>';
     });
 });
+*/

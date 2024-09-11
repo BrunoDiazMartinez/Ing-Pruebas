@@ -87,92 +87,70 @@
         </p>
     </footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Obtener los parámetros de la URL
-            const params = new URLSearchParams(window.location.search);
-            const nombreProducto = params.get('name');
-            const precioProducto = params.get('price');
-            const imagenProducto = params.get('image');
+    document.addEventListener('DOMContentLoaded', function () {
+    // Obtener los parámetros de la URL
+    const params = new URLSearchParams(window.location.search);
+    const nombreProducto = params.get('name');
+    const precioProducto = parseFloat(params.get('price')); // Asegúrate de convertir el precio a número
+    const imagenProducto = params.get('image');
 
-            // Actualizar el contenido de la página con los detalles del producto
-            const tituloProducto = document.querySelector('h1');
-            const imagen = document.querySelector('.articulo__imagen');
-            const descripcionProducto = document.querySelector('.articulo__contenido p');
+    // Actualizar el contenido de la página con los detalles del producto
+    const tituloProducto = document.querySelector('h1');
+    const imagen = document.querySelector('.articulo__imagen');
+    const descripcionProducto = document.querySelector('.articulo__contenido p');
 
-            tituloProducto.textContent = nombreProducto; // Mostrar el nombre del producto
-            imagen.src = imagenProducto; // Mostrar la imagen del producto
-            imagen.alt = nombreProducto; // Establecer un texto alternativo
-            descripcionProducto.textContent = `Precio: $${precioProducto}`; // Mostrar el precio del producto
+    tituloProducto.textContent = nombreProducto; 
+    imagen.src = imagenProducto;
+    imagen.alt = nombreProducto;
+    descripcionProducto.textContent = `Precio: $${precioProducto}`;
 
-            // Manejar la lógica del carrito
-            const formulario = document.getElementById('form-producto');
-            const carritoPreview = document.getElementById('carrito-preview');
+    // Manejar la lógica del carrito
+    const formulario = document.getElementById('form-producto');
 
-            // Función para mostrar productos del carrito en el preview
-            function actualizarCarritoPreview() {
-                const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-                carritoPreview.innerHTML = '';
+    formulario.addEventListener('submit', function (event) {
+        event.preventDefault();
 
-                if (carrito.length === 0) {
-                } else {
-                    carrito.forEach(producto => {
-                        const productoDiv = document.createElement('div');
-                        productoDiv.classList.add('producto-preview');
+        // Obtener talla y cantidad
+        const tallaSeleccionada = document.getElementById('talla').value;
+        const cantidad = parseInt(document.getElementById('cantidad').value, 10);
 
-                        productoDiv.innerHTML = `
-                            <p>${producto.nombre} (x${producto.cantidad}) - $${producto.precio}</p>
-                        `;
-                        carritoPreview.appendChild(productoDiv);
-                    });
-                }
-            }
+        // Validar talla y cantidad
+        if (tallaSeleccionada === "Seleccionar talla") {
+            alert('Por favor, selecciona una talla.');
+            return;
+        }
 
-            // Cargar el carrito al cargar la página
-            actualizarCarritoPreview();
+        if (isNaN(cantidad) || cantidad <= 0) {
+            alert('Por favor, selecciona una cantidad válida.');
+            return;
+        }
 
-            // Manejar el evento de agregar al carrito
-            formulario.addEventListener('submit', function (event) {
-                event.preventDefault(); // Evitar el envío del formulario
+        // Crear objeto del producto
+        const producto = {
+            nombre: nombreProducto,
+            precio: precioProducto,
+            imagen: imagenProducto,
+            talla: tallaSeleccionada,
+            cantidad: cantidad
+        };
 
-                // Obtener talla y cantidad
-                const tallaSeleccionada = document.getElementById('talla').value;
-                const cantidad = parseInt(document.getElementById('cantidad').value, 10);
+        // Obtener el carrito de localStorage
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
-                // Validar que se haya seleccionado una talla y una cantidad válida
-                if (tallaSeleccionada === "Seleccionar talla") {
-                    window.alert('Por favor, selecciona una talla.');
-                    return; // Detener la ejecución si no se ha seleccionado una talla
-                }
+        // Agregar el producto al carrito
+        carrito.push(producto);
 
-                if (isNaN(cantidad) || cantidad <= 0) {
-                    window.alert('Por favor, selecciona una cantidad válida.');
-                    return; // Detener la ejecución si la cantidad no es válida
-                }
+        // Guardar el carrito en localStorage
+        localStorage.setItem('carrito', JSON.stringify(carrito));
 
-                // Crear objeto del producto a agregar al carrito
-                const producto = {
-                    nombre: nombreProducto,
-                    precio: precioProducto,
-                    imagen: imagenProducto,
-                    talla: tallaSeleccionada,
-                    cantidad: cantidad
-                };
+        // Mostrar confirmación
+        alert('Producto agregado al carrito');
 
-                // Agregar el producto a localStorage
-                let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-                carrito.push(producto);
-                localStorage.setItem('carrito', JSON.stringify(carrito));
-
-                // Actualizar la vista del carrito
-                actualizarCarritoPreview();
-
-                // Mostrar confirmación de agregado
-                window.alert('Producto agregado al carrito');
-
-                window.location.href = 'index.html';
-            });
-        });
-    </script>
+        // Redirigir a la página principal
+        window.location.href = 'index.html';
+    });
+});
+</script>
 
 </body>
 
