@@ -18,9 +18,10 @@
 
     <nav class="navegacion">
         <a href="index.html" class="navegacion__enlace">Tienda</a>
-        <a href="carrito.html" class="navegacion__enlace"><svg xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-shopping-cart-filled" width="32" height="32" viewBox="0 0 24 24"
-                stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <a href="carrito.html" class="navegacion__enlace">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-filled" width="32"
+                height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                 <path
                     d="M6 2a1 1 0 0 1 .993 .883l.007 .117v1.068l13.071 .935a1 1 0 0 1 .929 1.024l-.01 .114l-1 7a1 1 0 0 1 -.877 .853l-.113 .006h-12v2h10a3 3 0 1 1 -2.995 3.176l-.005 -.176l.005 -.176c.017 -.288 .074 -.564 .166 -.824h-5.342a3 3 0 1 1 -5.824 1.176l-.005 -.176l.005 -.176a3.002 3.002 0 0 1 1.995 -2.654v-12.17h-1a1 1 0 0 1 -.993 -.883l-.007 -.117a1 1 0 0 1 .883 -.993l.117 -.007h2zm0 16a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm11 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z"
@@ -33,24 +34,65 @@
         <h1>Forma de Pago</h1>
 
         <form id="form-pago" class="formulario">
+            <h2>Selecciona una forma de pago:</h2>
             <div class="formulario__campo">
-                <label for="nombre">Nombre del Titular</label>
-                <input id="nombre" type="text" placeholder="Nombre del titular de la tarjeta" required>
+                <label>
+                    <input type="radio" name="forma-pago" value="tarjeta" id="pago-tarjeta"> Tarjeta de Crédito/Débito
+                </label>
+            </div>
+            <div class="formulario__campo">
+                <label>
+                    <input type="radio" name="forma-pago" value="paypal" id="pago-paypal"> PayPal
+                </label>
+            </div>
+            <div class="formulario__campo">
+                <label>
+                    <input type="radio" name="forma-pago" value="transferencia" id="pago-transferencia"> Transferencia Bancaria
+                </label>
             </div>
 
-            <div class="formulario__campo">
-                <label for="numero-tarjeta">Número de Tarjeta</label>
-                <input id="numero-tarjeta" type="text" placeholder="1234 5678 9101 1121" required>
+            <!-- Campos para Tarjeta de Crédito/Débito -->
+            <div id="seccion-tarjeta" style="display: none;">
+                <h3>Pago con Tarjeta de Crédito/Débito</h3>
+                <div class="formulario__campo">
+                    <label for="nombre">Nombre del Titular</label>
+                    <input id="nombre" type="text" placeholder="Nombre del titular de la tarjeta" required>
+                </div>
+
+                <div class="formulario__campo">
+                    <label for="numero-tarjeta">Número de Tarjeta</label>
+                    <input id="numero-tarjeta" type="text" placeholder="1234 5678 9101 1121" required>
+                </div>
+
+                <div class="formulario__campo">
+                    <label for="fecha-expiracion">Fecha de Expiración</label>
+                    <input id="fecha-expiracion" type="text" placeholder="MM/AA" required>
+                </div>
+
+                <div class="formulario__campo">
+                    <label for="cvv">CVV</label>
+                    <input id="cvv" type="text" placeholder="123" required>
+                </div>
             </div>
 
-            <div class="formulario__campo">
-                <label for="fecha-expiracion">Fecha de Expiración</label>
-                <input id="fecha-expiracion" type="text" placeholder="MM/AA" required>
+            <!-- Campos para PayPal -->
+            <div id="seccion-paypal" style="display: none;">
+                <h3>Pago con PayPal</h3>
+                <div class="formulario__campo">
+                    <label for="correo-paypal">Correo Electrónico</label>
+                    <input id="correo-paypal" type="email" placeholder="Introduce tu correo de PayPal" required>
+                </div>
             </div>
 
-            <div class="formulario__campo">
-                <label for="cvv">CVV</label>
-                <input id="cvv" type="text" placeholder="123" required>
+            <!-- Campos para Transferencia Bancaria -->
+            <div id="seccion-transferencia" style="display: none;">
+                <h3>Pago con Transferencia Bancaria</h3>
+                <p>Para completar la compra, realiza la transferencia a la siguiente cuenta bancaria:</p>
+                <ul>
+                    <li>Banco: Ejemplo Banco</li>
+                    <li>Número de Cuenta: 1234567890</li>
+                    <li>CLABE: 012345678901234567</li>
+                </ul>
             </div>
 
             <input class="formulario__submit" type="submit" value="Pagar">
@@ -64,12 +106,58 @@
     </footer>
 
     <script>
-        document.getElementById('form-pago').addEventListener('submit', function (event) {
-            event.preventDefault(); // Evitar el envío real
+        document.addEventListener('DOMContentLoaded', function () {
+            const pagoTarjetaCheckbox = document.getElementById('pago-tarjeta');
+            const pagoPaypalCheckbox = document.getElementById('pago-paypal');
+            const pagoTransferenciaCheckbox = document.getElementById('pago-transferencia');
 
-            // Aquí puedes agregar lógica para procesar el pago, por ejemplo, validar los campos
-            window.alert('Pago realizado con éxito');
-            window.location.href = 'index.html'; // Redirigir después de completar el pago
+            const seccionTarjeta = document.getElementById('seccion-tarjeta');
+            const seccionPaypal = document.getElementById('seccion-paypal');
+            const seccionTransferencia = document.getElementById('seccion-transferencia');
+
+            // Función para mostrar la sección correspondiente dependiendo del checkbox seleccionado
+            function mostrarSeccionPago() {
+                seccionTarjeta.style.display = pagoTarjetaCheckbox.checked ? 'block' : 'none';
+                seccionPaypal.style.display = pagoPaypalCheckbox.checked ? 'block' : 'none';
+                seccionTransferencia.style.display = pagoTransferenciaCheckbox.checked ? 'block' : 'none';
+            }
+
+            // Escuchar cambios en los checkboxes
+            pagoTarjetaCheckbox.addEventListener('change', mostrarSeccionPago);
+            pagoPaypalCheckbox.addEventListener('change', mostrarSeccionPago);
+            pagoTransferenciaCheckbox.addEventListener('change', mostrarSeccionPago);
+
+            // Validar y procesar el formulario
+            document.getElementById('form-pago').addEventListener('submit', function (event) {
+                event.preventDefault(); // Evitar el envío real
+
+                if (pagoTarjetaCheckbox.checked) {
+                    const nombre = document.getElementById('nombre').value;
+                    const numeroTarjeta = document.getElementById('numero-tarjeta').value;
+                    const fechaExpiracion = document.getElementById('fecha-expiracion').value;
+                    const cvv = document.getElementById('cvv').value;
+
+                    if (!nombre || !numeroTarjeta || !fechaExpiracion || !cvv) {
+                        window.alert('Por favor, completa todos los campos de la tarjeta.');
+                        return;
+                    }
+                }
+
+                if (pagoPaypalCheckbox.checked) {
+                    const correoPaypal = document.getElementById('correo-paypal').value;
+                    if (!correoPaypal) {
+                        window.alert('Por favor, introduce tu correo de PayPal.');
+                        return;
+                    }
+                }
+
+                if (pagoTransferenciaCheckbox.checked) {
+                    window.alert('Por favor, realiza la transferencia bancaria.');
+                }
+
+                window.alert('Pago realizado con éxito');
+                window.location.href = 'index.html'; // Redirigir después de completar el pago
+            });
         });
     </script>
 </body>
