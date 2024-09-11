@@ -21,14 +21,20 @@
 
         <form id="form-cliente" class="formulario__cliente">
             <label for="es-cliente">Selecciona una opción:</label>
-            <select id="es-cliente" class="formulario__cliente-campo">
-                <option value="" selected disabled>Selecciona una opción</option>
-                <option value="si">Sí</option>
-                <option value="no">No</option>
-            </select>
+            <div id="es-cliente" class="formulario__cliente__campos">
+                <p>Selecciona una opción:</p>
+                <label class="formulario__cliente__campo">
+                    <input type="radio" name="es_cliente" value="si">
+                    Sí
+                </label>
+                <label class="formulario__cliente__campo">
+                    <input type="radio" name="es_cliente" value="no">
+                    No
+                </label>
+            </div>
 
             <!-- Campos adicionales para clientes existentes -->
-            <div id="datos-cliente" style="display: none;">
+            <div id="datos-cliente" style="display: none;" class="formulario__cliente__success">
                 <h2>Información del Cliente Existente</h2>
                 <label for="id-cliente">ID Cliente</label>
                 <input id="id-cliente" type="text" placeholder="Introduce tu ID de cliente">
@@ -62,70 +68,82 @@
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const esClienteSelect = document.getElementById('es-cliente');
-            const datosClienteDiv = document.getElementById('datos-cliente');
-            const continuarPagoBtn = document.getElementById('continuar-pago');
-            const registroNuevoDiv = document.getElementById('registro-nuevo');
+    document.addEventListener('DOMContentLoaded', function () {
+    const datosClienteDiv = document.getElementById('datos-cliente');
+    const continuarPagoBtn = document.getElementById('continuar-pago');
+    const registroNuevoDiv = document.getElementById('registro-nuevo');
 
-            // Simulación de usuarios existentes (en un entorno real, esto vendría de una base de datos)
-            const usuariosExistentes = [
-                { id: '12345', password: 'password123', nombre: 'Juan', apellido: 'Pérez' },
-                { id: '67890', password: 'password456', nombre: 'María', apellido: 'García' }
-            ];
+    // Simulación de usuarios existentes (en un entorno real, esto vendría de una base de datos)
+    const usuariosExistentes = [
+        { id: '12345', password: 'password123', nombre: 'Juan', apellido: 'Pérez' },
+        { id: '67890', password: 'password456', nombre: 'María', apellido: 'García' }
+    ];
 
-            // Mostrar u ocultar secciones dependiendo de si el usuario es cliente
-            esClienteSelect.addEventListener('change', function () {
-                if (esClienteSelect.value === 'si') {
-                    datosClienteDiv.style.display = 'block'; // Mostrar campos adicionales
-                    continuarPagoBtn.style.display = 'block'; // Mostrar botón de continuar al pago
-                    registroNuevoDiv.style.display = 'none';  // Ocultar enlace de registro nuevo
-                } else if (esClienteSelect.value === 'no') {
-                    datosClienteDiv.style.display = 'none';  // Ocultar campos adicionales
-                    continuarPagoBtn.style.display = 'block'; // Mostrar botón de continuar
-                    registroNuevoDiv.style.display = 'block'; // Mostrar enlace de registro nuevo
-                }
-            });
+    // Función para manejar el cambio de selección
+    function manejarSeleccion() {
+        const esCliente = document.querySelector('input[name="es_cliente"]:checked');
+        
+        if (esCliente) {
+            if (esCliente.value === 'si') {
+                datosClienteDiv.style.display = 'block'; // Mostrar campos adicionales
+                continuarPagoBtn.style.display = 'block'; // Mostrar botón de continuar al pago
+                registroNuevoDiv.style.display = 'none';  // Ocultar enlace de registro nuevo
+            } else if (esCliente.value === 'no') {
+                datosClienteDiv.style.display = 'none';  // Ocultar campos adicionales
+                continuarPagoBtn.style.display = 'block'; // Mostrar botón de continuar
+                registroNuevoDiv.style.display = 'block'; // Mostrar enlace de registro nuevo
+            }
+        }
+    }
 
-            // Validar y continuar al formulario de pago
-            const formCliente = document.getElementById('form-cliente');
-            formCliente.addEventListener('submit', function (event) {
-                event.preventDefault(); // Prevenir el envío por defecto
+    // Añadir evento a los botones de radio
+    document.querySelectorAll('input[name="es_cliente"]').forEach(radio => {
+        radio.addEventListener('change', manejarSeleccion);
+    });
 
-                // Validar si los campos del cliente están completos (solo si selecciona "sí")
-                const esCliente = esClienteSelect.value;
-                if (esCliente === 'si') {
-                    const idCliente = document.getElementById('id-cliente').value;
-                    const password = document.getElementById('password').value;
-                    const nombreCliente = document.getElementById('nombre-cliente').value;
-                    const apellidoCliente = document.getElementById('apellido-cliente').value;
+    // Inicializar la visibilidad al cargar la página
+    manejarSeleccion();
 
-                    if (!idCliente || !password || !nombreCliente || !apellidoCliente) {
-                        window.alert('Por favor, completa todos los campos de cliente.');
-                        return; // Detener el proceso si algún campo está vacío
-                    }
+    // Validar y continuar al formulario de pago
+    const formCliente = document.getElementById('form-cliente');
+    formCliente.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevenir el envío por defecto
 
-                    // Validar si el usuario existe en nuestra simulación y si los datos coinciden
-                    const usuarioValido = usuariosExistentes.find(usuario =>
-                        usuario.id === idCliente &&
-                        usuario.password === password &&
-                        usuario.nombre === nombreCliente &&
-                        usuario.apellido === apellidoCliente
-                    );
+        // Validar si los campos del cliente están completos (solo si selecciona "sí")
+        const esCliente = document.querySelector('input[name="es_cliente"]:checked');
+        if (esCliente && esCliente.value === 'si') {
+            const idCliente = document.getElementById('id-cliente').value;
+            const password = document.getElementById('password').value;
+            const nombreCliente = document.getElementById('nombre-cliente').value;
+            const apellidoCliente = document.getElementById('apellido-cliente').value;
 
-                    if (!usuarioValido) {
-                        window.alert('ID, contraseña, nombre o apellido incorrectos. Por favor, intenta de nuevo.');
-                        return; // Detener si el usuario no existe o los datos no coinciden
-                    }
+            if (!idCliente || !password || !nombreCliente || !apellidoCliente) {
+                window.alert('Por favor, completa todos los campos de cliente.');
+                return; // Detener el proceso si algún campo está vacío
+            }
 
-                    // Si los datos son correctos, redirigir al formulario de pago
-                    window.location.href = 'pago.html';
-                } else {
-                    // Si selecciona "no", redirigir al formulario de pago directamente
-                    window.location.href = 'pago.html';
-                }
-            });
-        });
+            // Validar si el usuario existe en nuestra simulación y si los datos coinciden
+            const usuarioValido = usuariosExistentes.find(usuario =>
+                usuario.id === idCliente &&
+                usuario.password === password &&
+                usuario.nombre === nombreCliente &&
+                usuario.apellido === apellidoCliente
+            );
+
+            if (!usuarioValido) {
+                window.alert('ID, contraseña, nombre o apellido incorrectos. Por favor, intenta de nuevo.');
+                return; // Detener si el usuario no existe o los datos no coinciden
+            }
+
+            // Si los datos son correctos, redirigir al formulario de pago
+            window.location.href = 'pago.html';
+        } else {
+            // Si selecciona "no", redirigir al formulario de pago directamente
+            window.location.href = 'pago.html';
+        }
+    });
+});
+
     </script>
 </body>
 
