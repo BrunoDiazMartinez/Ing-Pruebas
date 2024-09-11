@@ -1,11 +1,16 @@
 :root {
+    /*Colores*/
     --primario: #9c27b0;
     --primarioOscuro: #98119D;
     --secundario: #FFCE00;
     --secudarioOscuro: rgb(233, 287, 2);
     --blanco: #fff;
     --negro: #000;
-
+    --morado: #5B41DE;
+    --amarillo: #FCF150;
+    --verde: #257F2D;
+    --negro: #171717;
+    /*Fuentes de letra*/
     --fuentePrincipal: "Roboto Slab", serif;
 }
 
