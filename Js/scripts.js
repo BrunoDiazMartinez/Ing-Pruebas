@@ -83,36 +83,39 @@ document.addEventListener("DOMContentLoaded", function () {
         productGrid.innerHTML = '';
 
         productos.forEach(product => {
+            // Crear el div del producto
             const productDiv = document.createElement('div');
             productDiv.classList.add('producto');
-
             const productLink = document.createElement('a');
             productLink.href = `productos.html?name=${encodeURIComponent(product.name)}&price=${encodeURIComponent(product.price)}&image=${encodeURIComponent(product.image)}`;
-
+            productLink.classList.add('producto__enlace');
             const productImage = document.createElement('img');
             productImage.classList.add('producto__imagen');
             productImage.src = product.image;
             productImage.alt = `imagen ${product.name}`;
-
+        
             const productInfo = document.createElement('div');
             productInfo.classList.add('producto__informacion');
-
+        
             const productName = document.createElement('p');
             productName.classList.add('producto__nombre');
             productName.textContent = product.name;
-
+        
             const productPrice = document.createElement('p');
             productPrice.classList.add('producto__precio');
             productPrice.textContent = `$${product.price} MXN`;
-
+        
             productInfo.appendChild(productName);
             productInfo.appendChild(productPrice);
+        
             productLink.appendChild(productImage);
+            productLink.appendChild(productInfo);
+        
             productDiv.appendChild(productLink);
-            productDiv.appendChild(productInfo);
-
+        
             productGrid.appendChild(productDiv);
         });
+        
     }
 
     mostrarProductos(products);
