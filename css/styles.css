@@ -1,11 +1,11 @@
 :root {
     /*Colores*/
-    --primario: #9c27b0;
+    /* --primario: #9c27b0;
     --primarioOscuro: #98119D;
     --secundario: #FFCE00;
     --secudarioOscuro: rgb(233, 287, 2);
+    --negro: #000; */
     --blanco: #fff;
-    --negro: #000;
     --morado: #5B41DE;
     --amarillo: #FCF150;
     --verde: #257F2D;
@@ -29,7 +29,7 @@ html {
 
 /*Globales*/
 body {
-    background-color: var(--primario);
+    background-color: var(--blanco);
     font-size: 1.6rem;
     line-height: 1.5;
 }
@@ -81,15 +81,15 @@ h3 {
 }
 
 .navegacion {
-    background-color: var(--primarioOscuro);
+    background-color: var(--morado);
     padding: 1rem 0;
     display: flex;
     justify-content: center;
     gap: 4rem;
+    font-weight: 400;
 }
 
 .navegacion__enlace {
-    font-family: var(--fuentePrincipal);
     color: var(--blanco);
     font-size: 3rem;
 }
@@ -119,17 +119,15 @@ h3 {
 }
 
 .producto {
-    background-color: var(--primarioOscuro);
+    background-color: var(--amarillo);
     border-radius: 1.8rem;
     margin: auto;
     padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .producto__nombre {
     font-size: 2.5rem;
+    color: var(--negro);
 }
 
 .producto__precio {
@@ -145,12 +143,13 @@ h3 {
     line-height: 2.5rem;
 }
 .producto__imagen{
+    margin: 0 1.5rem;
     border-radius: 1.2rem;
     height: 25rem;
     width: 25rem;
 }
 .footer {
-    background-color: var(--primarioOscuro);
+    background-color: var(--morado);
     padding: 1rem 0;
     margin-top: 2rem;
 }
@@ -225,6 +224,9 @@ h3 {
         gap: 2rem;
         justify-items: center;
         align-items: center;
+        background-color: var(--amarillo);
+        padding: 2.5rem;
+        border-radius: 1.5rem;
     }
 }
 
@@ -238,20 +240,31 @@ h3 {
     max-height: 90rem;
 }
 
-.articulo__contenido>p{
-    font-size: 2rem;
+.articulo__contenido__campo{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0.9rem;
+}
+
+.articulo__contenido__campo>svg{
+    margin: 1.5rem;
+}
+
+.articulo__contenido__campo>p{
+    color: var(--negro);
+    font-weight: 600;
 }
 
 .formulario {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 3rem;
 }
 
 .formulario__campo{
     border: 0.8rem solid var(--primarioOscuro);
-    background-color: var(--blanco);
+    
     color: var(--negro);
     font-size: 2rem;
     font-family: Arial, Helvetica, sans-serif;
@@ -263,7 +276,8 @@ h3 {
 }
 
 .formulario__submit {
-    background-color: var(--secundario);
+    background-color: var(--morado);
+    color: var(--blanco);
     border: none;
     font-size: 1.4rem;
     font-family: var(--fuentePrincipal);
@@ -348,7 +362,13 @@ h3 {
     justify-content: space-evenly;
     padding: 2.4rem;
     border-bottom: 1px solid black;
+    margin: 1.5rem;
 }
+
+.contenedor__carrito>*{
+    color: var(--negro);
+}
+
 .contenedor__carrito>img{
     height: 10rem;
     width: 10rem;

@@ -20,8 +20,16 @@
         <a href="index.html" class="navegacion__enlace">Tienda</a>
         <a href="nosotros.html" class="navegacion__enlace navegacion__enlace--activo">Nosotros</a>
         <div class="carrito-contenedor"></div>
-        <a href="carrito.html" class="navegacion__enlace">Ver Carrito</a>
-        <div id="carrito-preview"></div> <!-- Este contenedor muestra los productos -->
+        <a href="carrito.html" class="navegacion__enlace">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-shopping-cart-filled" width="32"
+                height="32" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                    d="M6 2a1 1 0 0 1 .993 .883l.007 .117v1.068l13.071 .935a1 1 0 0 1 .929 1.024l-.01 .114l-1 7a1 1 0 0 1 -.877 .853l-.113 .006h-12v2h10a3 3 0 1 1 -2.995 3.176l-.005 -.176l.005 -.176c.017 -.288 .074 -.564 .166 -.824h-5.342a3 3 0 1 1 -5.824 1.176l-.005 -.176l.005 -.176a3.002 3.002 0 0 1 1.995 -2.654v-12.17h-1a1 1 0 0 1 -.993 -.883l-.007 -.117a1 1 0 0 1 .883 -.993l.117 -.007h2zm0 16a1 1 0 1 0 0 2a1 1 0 0 0 0 -2zm11 0a1 1 0 1 0 0 2a1 1 0 0 0 0 -2z"
+                    stroke-width="0" fill="currentColor" />
+            </svg>
+        </a>
         </div>
     </nav>
     <main class="contenedor">
@@ -30,15 +38,44 @@
             <img src="" alt="" class="articulo__imagen">
             <!-- Este se actualizará dinámicamente con la imagen del producto -->
             <div class="articulo__contenido">
-                <p></p> <!-- Este se actualizará dinámicamente con la descripción del producto -->
+                <div class="articulo__contenido__campo">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="32"
+                        height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#5B41DE" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M7.5 7.5m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                        <path
+                            d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3z" />
+                    </svg>
+                    <p></p>
+                </div> <!-- Este se actualizará dinámicamente con la descripción del producto -->
                 <form id="form-producto" class="formulario">
-                    <select class="formulario__campo" id="talla">
-                        <option disabled selected>Seleccionar talla</option>
-                        <option value="Chica">Chica</option>
-                        <option value="Mediana">Mediana</option>
-                        <option value="Grande">Grande</option>
-                    </select>
-                    <input id="cantidad" class="formulario__campo" type="number" placeholder="Cantidad" min="1">
+                    <div class="articulo__contenido__campo">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hanger" width="32"
+                            height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#5B41DE" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M14 6a2 2 0 1 0 -4 0c0 1.667 .67 3 2 4h-.008l7.971 4.428a2 2 0 0 1 1.029 1.749v.823a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-.823a2 2 0 0 1 1.029 -1.749l7.971 -4.428" />
+                        </svg>
+                        <select class="formulario__campo" id="talla">
+                            <option disabled selected>Seleccionar talla</option>
+                            <option value="Chica">Chica</option>
+                            <option value="Mediana">Mediana</option>
+                            <option value="Grande">Grande</option>
+                        </select>
+                    </div>
+                    <div class="articulo__contenido__campo">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-number" width="32"
+                            height="32" viewBox="0 0 24 24" stroke-width="2" stroke="#5B41DE" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M4 17v-10l7 10v-10" />
+                            <path d="M15 17h5" />
+                            <path d="M17.5 10m-2.5 0a2.5 3 0 1 0 5 0a2.5 3 0 1 0 -5 0" />
+                        </svg>
+                        <input id="cantidad" class="formulario__campo" type="number" placeholder="Cantidad" min="1">
+                    </div>
                     <input class="formulario__submit" type="submit" value="Agregar al carrito">
                 </form>
             </div>
@@ -56,32 +93,32 @@
             const nombreProducto = params.get('name');
             const precioProducto = params.get('price');
             const imagenProducto = params.get('image');
-    
+
             // Actualizar el contenido de la página con los detalles del producto
             const tituloProducto = document.querySelector('h1');
             const imagen = document.querySelector('.articulo__imagen');
             const descripcionProducto = document.querySelector('.articulo__contenido p');
-    
+
             tituloProducto.textContent = nombreProducto; // Mostrar el nombre del producto
             imagen.src = imagenProducto; // Mostrar la imagen del producto
             imagen.alt = nombreProducto; // Establecer un texto alternativo
             descripcionProducto.textContent = `Precio: $${precioProducto}`; // Mostrar el precio del producto
-    
+
             // Manejar la lógica del carrito
             const formulario = document.getElementById('form-producto');
             const carritoPreview = document.getElementById('carrito-preview');
-    
+
             // Función para mostrar productos del carrito en el preview
             function actualizarCarritoPreview() {
                 const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
                 carritoPreview.innerHTML = '';
-    
+
                 if (carrito.length === 0) {
                 } else {
                     carrito.forEach(producto => {
                         const productoDiv = document.createElement('div');
                         productoDiv.classList.add('producto-preview');
-    
+
                         productoDiv.innerHTML = `
                             <p>${producto.nombre} (x${producto.cantidad}) - $${producto.precio}</p>
                         `;
@@ -89,29 +126,29 @@
                     });
                 }
             }
-    
+
             // Cargar el carrito al cargar la página
             actualizarCarritoPreview();
-    
+
             // Manejar el evento de agregar al carrito
             formulario.addEventListener('submit', function (event) {
                 event.preventDefault(); // Evitar el envío del formulario
-    
+
                 // Obtener talla y cantidad
                 const tallaSeleccionada = document.getElementById('talla').value;
                 const cantidad = parseInt(document.getElementById('cantidad').value, 10);
-    
+
                 // Validar que se haya seleccionado una talla y una cantidad válida
                 if (tallaSeleccionada === "Seleccionar talla") {
                     window.alert('Por favor, selecciona una talla.');
                     return; // Detener la ejecución si no se ha seleccionado una talla
                 }
-    
+
                 if (isNaN(cantidad) || cantidad <= 0) {
                     window.alert('Por favor, selecciona una cantidad válida.');
                     return; // Detener la ejecución si la cantidad no es válida
                 }
-    
+
                 // Crear objeto del producto a agregar al carrito
                 const producto = {
                     nombre: nombreProducto,
@@ -120,23 +157,23 @@
                     talla: tallaSeleccionada,
                     cantidad: cantidad
                 };
-    
+
                 // Agregar el producto a localStorage
                 let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
                 carrito.push(producto);
                 localStorage.setItem('carrito', JSON.stringify(carrito));
-    
+
                 // Actualizar la vista del carrito
                 actualizarCarritoPreview();
-    
+
                 // Mostrar confirmación de agregado
                 window.alert('Producto agregado al carrito');
-    
+
                 window.location.href = 'index.html';
             });
         });
     </script>
-    
+
 </body>
 
 </html>
